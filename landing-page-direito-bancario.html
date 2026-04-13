@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tese Bancária Pro — Curso para Advogados</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #122040;
+    --navy-light: #1e3460;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-pale: #f5e6c0;
+    --white: #ffffff;
+    --off-white: #f9f6ee;
+    --gray-light: #e8e4d8;
+    --gray-mid: #b0a99a;
+    --text-muted: #7a7060;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--navy);
+    color: var(--white);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ===== TOPBAR ===== */
+  .topbar {
+    background: var(--gold);
+    color: var(--navy);
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 50%, #0c1f3e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.12);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -300px;
+    left: -150px;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.07);
+  }
+
+  .hero-inner {
+    max-width: 860px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 40px;
+    margin-bottom: 36px;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(38px, 6vw, 68px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: clamp(17px, 2.2vw, 21px);
+    color: var(--gray-light);
+    max-width: 640px;
+    margin: 0 auto 20px;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .hero-disclaimer {
+    font-size: 13px;
+    color: var(--gray-mid);
+    margin-bottom: 48px;
+    font-style: italic;
+  }
+
+  /* ===== FORM ===== */
+  .form-box {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 520px;
+    margin: 0 auto;
+    backdrop-filter: blur(8px);
+  }
+
+  .form-box h3 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .form-box p {
+    font-size: 14px;
+    color: var(--gray-mid);
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group input {
+    width: 100%;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input::placeholder { color: rgba(255,255,255,0.35); }
+  .form-group input:focus { border-color: var(--gold); }
+
+  .btn-gold {
+    display: block;
+    width: 100%;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    border-radius: 8px;
+    padding: 17px 24px;
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 8px;
+  }
+
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-gold:active { transform: translateY(0); }
+
+  .form-trust {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .form-trust svg { width: 14px; height: 14px; fill: var(--text-muted); }
+
+  /* ===== SECTION BASE ===== */
+  section { padding: 90px 24px; }
+
+  .container { max-width: 1060px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  .section-body {
+    font-size: 17px;
+    color: var(--gray-light);
+    max-width: 620px;
+    line-height: 1.8;
+  }
+
+  /* ===== PROBLEM ===== */
+  .section-problem {
+    background: var(--off-white);
+    color: var(--navy);
+  }
+
+  .section-problem .section-title { color: var(--navy); }
+  .section-problem .section-body { color: #4a4438; }
+  .section-problem .section-label { color: var(--gold); }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 52px;
+  }
+
+  .problem-card {
+    background: var(--white);
+    border: 1px solid var(--gray-light);
+    border-left: 4px solid var(--gold);
+    border-radius: 10px;
+    padding: 28px 24px;
+  }
+
+  .problem-card p {
+    font-size: 15px;
+    color: #3a342c;
+    line-height: 1.7;
+  }
+
+  /* ===== SOLUTION / BENEFITS ===== */
+  .section-benefits { background: var(--navy-mid); }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    margin-top: 56px;
+  }
+
+  .benefit-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 12px;
+    padding: 32px 28px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .benefit-card:hover { border-color: rgba(201,168,76,0.45); transform: translateY(-3px); }
+
+  .benefit-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(201,168,76,0.12);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+
+  .benefit-card h4 {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+  }
+
+  .benefit-card p {
+    font-size: 15px;
+    color: var(--gray-light);
+    line-height: 1.7;
+  }
+
+  /* ===== INSTRUCTOR ===== */
+  .section-instructor { background: var(--navy); }
+
+  .instructor-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 70px;
+    align-items: center;
+  }
+
+  .instructor-photo {
+    position: relative;
+  }
+
+  .photo-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: linear-gradient(160deg, var(--navy-light), var(--navy-mid));
+    border-radius: 16px;
+    border: 1px solid rgba(201,168,76,0.2);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-style: italic;
+  }
+
+  .gold-line {
+    width: 60px;
+    height: 3px;
+    background: var(--gold);
+    margin: 20px 0;
+  }
+
+  .instructor-name {
+    font-family: var(--serif);
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .instructor-title {
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .instructor-bio {
+    font-size: 16px;
+    color: var(--gray-light);
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+
+  .credentials {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cred-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--gray-light);
+  }
+
+  .cred-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
+  /* ===== CURRICULUM ===== */
+  .section-curriculum {
+    background: var(--off-white);
+    color: var(--navy);
+  }
+
+  .section-curriculum .section-title { color: var(--navy); }
+  .section-curriculum .section-label { color: var(--gold); }
+
+  .modules-list {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .module-item {
+    border-bottom: 1px solid var(--gray-light);
+    padding: 24px 0;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .module-num {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    padding-top: 4px;
+  }
+
+  .module-info h4 {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .module-info p {
+    font-size: 14px;
+    color: #6a6050;
+    line-height: 1.6;
+  }
+
+  /* ===== SOCIAL PROOF ===== */
+  .section-proof { background: var(--navy-mid); }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 52px;
+  }
+
+  .testimonial {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 12px;
+    padding: 28px;
+  }
+
+  .stars {
+    color: var(--gold);
+    font-size: 16px;
+    margin-bottom: 14px;
+    letter-spacing: 2px;
+  }
+
+  .testimonial blockquote {
+    font-size: 15px;
+    color: var(--gray-light);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .testimonial-author strong {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    display: block;
+  }
+
+  .testimonial-author span {
+    font-size: 12px;
+    color: var(--gray-mid);
+  }
+
+  /* ===== FOR YOU ===== */
+  .section-foryou { background: var(--navy); }
+
+  .foryou-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 52px;
+  }
+
+  .foryou-col h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .foryou-col.yes h3 { color: var(--gold-light); }
+  .foryou-col.no h3 { color: var(--gray-mid); }
+
+  .check-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--gray-light);
+    line-height: 1.5;
+  }
+
+  .check-mark { color: var(--gold); font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+  .x-mark { color: var(--gray-mid); font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+
+  /* ===== FAQ ===== */
+  .section-faq { background: var(--off-white); color: var(--navy); }
+  .section-faq .section-title { color: var(--navy); }
+  .section-faq .section-label { color: var(--gold); }
+
+  .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 0; }
+
+  .faq-item {
+    border-bottom: 1px solid var(--gray-light);
+    padding: 24px 0;
+  }
+
+  .faq-q {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .faq-a {
+    font-size: 15px;
+    color: #5a5040;
+    line-height: 1.7;
+  }
+
+  /* ===== CTA FINAL ===== */
+  .section-cta {
+    background: linear-gradient(140deg, var(--navy-mid), var(--navy));
+    text-align: center;
+    padding: 100px 24px;
+  }
+
+  .cta-box {
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .cta-box .section-title {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .cta-box p {
+    font-size: 17px;
+    color: var(--gray-light);
+    margin-bottom: 40px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #070f1e;
+    text-align: center;
+    padding: 36px 24px;
+    font-size: 13px;
+    color: var(--text-muted);
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 700px) {
+    .instructor-wrap { grid-template-columns: 1fr; gap: 40px; }
+    .foryou-cols { grid-template-columns: 1fr; gap: 28px; }
+    .form-box { padding: 28px 20px; }
+    section { padding: 64px 20px; }
+    .photo-placeholder { aspect-ratio: 1/1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">⚖ Vagas limitadas — Turma fechando em breve</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Formação exclusiva para advogados</span>
+    <h1>A Tese que os Bancos<br><em>Não Querem</em> que Você Conheça</h1>
+    <p class="hero-sub">Domine a tese mais poderosa do direito bancário atual, construa petições irrebatíveis e gere resultados concretos para seus clientes — em semanas, não anos.</p>
+    <p class="hero-disclaimer">Material desenvolvido por especialista com mais de 200 casos patrocinados em direito bancário.</p>
+
+    <div class="form-box">
+      <h3>Quero Acesso ao Curso</h3>
+      <p>Preencha abaixo e entre no nosso grupo VIP de advogados</p>
+      <div class="form-group">
+        <input type="text" placeholder="Seu nome completo" id="nome">
+      </div>
+      <div class="form-group">
+        <input type="email" placeholder="Seu melhor e-mail" id="email">
+      </div>
+      <div class="form-group">
+        <input type="tel" placeholder="WhatsApp com DDD" id="tel">
+      </div>
+      <button class="btn-gold" onclick="handleSubmit()">Garantir Minha Vaga no Grupo VIP →</button>
+      <div class="form-trust">
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+        <span>Seus dados estão seguros. Sem spam.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section class="section-problem">
+  <div class="container">
+    <span class="section-label">O cenário atual</span>
+    <h2 class="section-title">Por que tantos advogados perdem causas bancárias que deveriam ganhar?</h2>
+    <p class="section-body">O sistema bancário opera com assimetria de informação. Enquanto os bancos têm departamentos jurídicos especializados, a maioria dos advogados enfrenta esses processos sem conhecer as brechas legais que realmente funcionam.</p>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <p><strong>Petições genéricas</strong> que não tocam nas vulnerabilidades reais dos contratos bancários — e são facilmente refutadas pelos bancos.</p>
+      </div>
+      <div class="problem-card">
+        <p><strong>Falta de domínio técnico</strong> sobre juros abusivos, revisão de cláusulas e a tese específica que tem gerado vitórias consistentes.</p>
+      </div>
+      <div class="problem-card">
+        <p><strong>Clientes insatisfeitos</strong> que não entendem por que perderam, e advogados que sentem que falta algo — mas não sabem o quê.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFÍCIOS -->
+<section class="section-benefits">
+  <div class="container">
+    <span class="section-label">O que você vai dominar</span>
+    <h2 class="section-title">Seis transformações que este curso entrega</h2>
+
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">⚖</div>
+        <h4>A Tese Completa</h4>
+        <p>Entenda a fundamentação jurídica do início ao fim — doutrina, jurisprudência e os argumentos que estão vencendo nos tribunais hoje.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">📝</div>
+        <h4>Modelos de Petição</h4>
+        <p>Acesso a peças prontas, adaptáveis ao seu caso. Economize horas de trabalho e aumente a precisão técnica das suas petições.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🎯</div>
+        <h4>Triagem de Clientes</h4>
+        <p>Saiba exatamente quais contratos têm potencial real de vitória. Não aceite mais casos sem perspectiva — e cobre mais pelos que valem.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">💼</div>
+        <h4>Captação Especializada</h4>
+        <p>Como se posicionar como referência no direito bancário e atrair clientes de maior valor em seu mercado local ou digital.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🏛</div>
+        <h4>Jurisprudência Atualizada</h4>
+        <p>Acesso aos precedentes mais recentes do STJ e TJs regionais que sustentam a tese — sempre com análise crítica e aplicação prática.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🤝</div>
+        <h4>Comunidade de Advogados</h4>
+        <p>Grupo exclusivo no WhatsApp para troca de experiências, dúvidas técnicas e parcerias entre advogados da turma.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUTOR -->
+<section class="section-instructor">
+  <div class="container">
+    <div class="instructor-wrap">
+      <div class="instructor-photo">
+        <div class="photo-placeholder">[ Foto do instrutor ]</div>
+      </div>
+      <div class="instructor-info">
+        <span class="section-label">Seu instrutor</span>
+        <h2 class="instructor-name">Dr. [Nome do Instrutor]</h2>
+        <p class="instructor-title">Especialista em Direito Bancário e Contratos Financeiros</p>
+        <div class="gold-line"></div>
+        <p class="instructor-bio">Com mais de uma década de atuação exclusiva em direito bancário, o Dr. [Nome] construiu um histórico sólido de vitórias em causas que outros escritórios recusavam. É nessa experiência de campo — e não apenas na teoria — que este curso foi construído.</p>
+        <div class="credentials">
+          <div class="cred-item"><div class="cred-dot"></div><span>Mais de 200 processos bancários patrocinados em todo o Brasil</span></div>
+          <div class="cred-item"><div class="cred-dot"></div><span>Especialização em Direito Bancário e Financeiro — [Instituição]</span></div>
+          <div class="cred-item"><div class="cred-dot"></div><span>Palestrante em congressos de direito do consumidor e bancário</span></div>
+          <div class="cred-item"><div class="cred-dot"></div><span>Formador de mais de [X] advogados na tese de direito bancário</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRÍCULO -->
+<section class="section-curriculum">
+  <div class="container">
+    <span class="section-label">Conteúdo do curso</span>
+    <h2 class="section-title">O que você vai aprender, módulo por módulo</h2>
+    <div class="modules-list">
+      <div class="module-item">
+        <div class="module-num">01</div>
+        <div class="module-info">
+          <h4>Fundamentos do Sistema Bancário e Contratos de Crédito</h4>
+          <p>Como os contratos são estruturados, onde estão as cláusulas abusivas mais comuns e a visão sistêmica que poucos advogados têm.</p>
+        </div>
+      </div>
+      <div class="module-item">
+        <div class="module-num">02</div>
+        <div class="module-info">
+          <h4>A Tese: Fundamentos Jurídicos e Doutrina Aplicada</h4>
+          <p>A exposição completa da tese, seus pilares doutrinários, os dispositivos legais e a lógica jurídica que a sustenta.</p>
+        </div>
+      </div>
+      <div class="module-item">
+        <div class="module-num">03</div>
+        <div class="module-info">
+          <h4>Jurisprudência: Do STJ aos Tribunais Regionais</h4>
+          <p>Os precedentes que você precisa citar, como os utilizar estrategicamente e quais os tribunais mais receptivos à tese.</p>
+        </div>
+      </div>
+      <div class="module-item">
+        <div class="module-num">04</div>
+        <div class="module-info">
+          <h4>Triagem e Avaliação de Casos</h4>
+          <p>Como identificar quais contratos têm viabilidade real, quais documentos solicitar e como apresentar uma avaliação profissional ao cliente.</p>
+        </div>
+      </div>
+      <div class="module-item">
+        <div class="module-num">05</div>
+        <div class="module-info">
+          <h4>Estrutura da Petição Vencedora</h4>
+          <p>Análise linha por linha de peças reais com resultados favoráveis — e os modelos que você pode adaptar imediatamente.</p>
+        </div>
+      </div>
+      <div class="module-item">
+        <div class="module-num">06</div>
+        <div class="module-info">
+          <h4>Estratégia de Negociação e Honorários</h4>
+          <p>Como conduzir acordos, fixar honorários condizentes com a especialidade e gerir a expectativa do cliente em todas as fases.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROVA SOCIAL -->
+<section class="section-proof">
+  <div class="container">
+    <span class="section-label">Depoimentos</span>
+    <h2 class="section-title">O que dizem os advogados da turma anterior</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Apliquei a tese logo na segunda semana de curso. O processo estava parado há meses — consegui um acordo 40% acima do que o cliente esperava. Indispensável."</blockquote>
+        <div class="testimonial-author">
+          <strong>Dra. [Nome]</strong>
+          <span>Advogada civilista — [Cidade], [Estado]</span>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Finalmente entendi por que estava perdendo causas que deveriam ser ganhas. A fundamentação do curso é sólida e os modelos de petição salvam horas de trabalho."</blockquote>
+        <div class="testimonial-author">
+          <strong>Dr. [Nome]</strong>
+          <span>Advogado — [Cidade], [Estado]</span>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Fiz três cursos de direito bancário antes deste. Nenhum chegou perto da profundidade prática que o Dr. [Nome] entrega. Vale cada centavo investido."</blockquote>
+        <div class="testimonial-author">
+          <strong>Dra. [Nome]</strong>
+          <span>Advogada — [Cidade], [Estado]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUEM É -->
+<section class="section-foryou">
+  <div class="container">
+    <span class="section-label">Perfil do aluno</span>
+    <h2 class="section-title" style="margin-bottom: 0;">Este curso é para você?</h2>
+    <div class="foryou-cols">
+      <div class="foryou-col yes">
+        <h3>✓ É para você se…</h3>
+        <ul class="check-list">
+          <li><span class="check-mark">✓</span><span>Você é advogado inscrito na OAB e quer atuar em direito bancário</span></li>
+          <li><span class="check-mark">✓</span><span>Já tem casos bancários na carteira e quer melhorar os resultados</span></li>
+          <li><span class="check-mark">✓</span><span>Quer se especializar em uma área com alta demanda e poucos especialistas</span></li>
+          <li><span class="check-mark">✓</span><span>Busca modelos prontos para escalar sua produção sem abrir mão da qualidade</span></li>
+          <li><span class="check-mark">✓</span><span>Quer aumentar seus honorários com posicionamento de especialista</span></li>
+        </ul>
+      </div>
+      <div class="foryou-col no">
+        <h3>✗ Não é para você se…</h3>
+        <ul class="check-list">
+          <li><span class="x-mark">✗</span><span>Você não é advogado formado ou não está habilitado pela OAB</span></li>
+          <li><span class="x-mark">✗</span><span>Está buscando conteúdo teórico sem aplicação prática</span></li>
+          <li><span class="x-mark">✗</span><span>Não está disposto a dedicar tempo para implementar o que vai aprender</span></li>
+          <li><span class="x-mark">✗</span><span>Prefere continuar trabalhando de forma generalista sem especialização</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-faq">
+  <div class="container">
+    <span class="section-label">Dúvidas frequentes</span>
+    <h2 class="section-title">Perguntas que recebemos</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <p class="faq-q">Preciso ter experiência prévia em direito bancário?</p>
+        <p class="faq-a">Não. O curso foi desenhado para advogados de qualquer área que queiram ingressar ou se aprofundar no direito bancário. Começamos pela base e avançamos até a aplicação prática da tese.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Como o conteúdo é entregue?</p>
+        <p class="faq-a">O curso é 100% online, com aulas gravadas que você assiste no seu ritmo, além de encontros ao vivo para tirar dúvidas. O acesso à plataforma e ao grupo de WhatsApp é imediato após a inscrição.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Os modelos de petição são adaptáveis ao meu estado?</p>
+        <p class="faq-a">Sim. Todos os modelos foram estruturados para adaptação às especificidades regionais, com orientações sobre os tribunais mais receptivos à tese em cada região do Brasil.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Por quanto tempo terei acesso ao curso?</p>
+        <p class="faq-a">O acesso à plataforma é por [X] meses, com possibilidade de renovação. O grupo de WhatsApp é permanente para a turma.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Há garantia caso eu não me adapte?</p>
+        <p class="faq-a">Sim. Oferecemos garantia incondicional de [X] dias. Se dentro desse prazo você não estiver satisfeito, devolvemos 100% do investimento sem perguntas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="section-cta">
+  <div class="cta-box">
+    <span class="section-label" style="text-align:center; display:block;">Vagas limitadas</span>
+    <h2 class="section-title">Pronto para dominar a tese que está transformando carreiras?</h2>
+    <p>Entre no grupo VIP, receba os primeiros materiais gratuitamente e garanta sua vaga na turma antes que as inscrições encerrem.</p>
+
+    <div class="form-box" style="background: rgba(255,255,255,0.06);">
+      <h3>Garantir Minha Vaga Agora</h3>
+      <p>Acesso imediato ao grupo de advogados</p>
+      <div class="form-group">
+        <input type="text" placeholder="Seu nome completo" id="nome2">
+      </div>
+      <div class="form-group">
+        <input type="email" placeholder="Seu melhor e-mail" id="email2">
+      </div>
+      <div class="form-group">
+        <input type="tel" placeholder="WhatsApp com DDD" id="tel2">
+      </div>
+      <button class="btn-gold" onclick="handleSubmit2()">Entrar no Grupo VIP Agora →</button>
+      <div class="form-trust">
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:#7a7060;"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+        <span>Inscrição 100% segura. Acesso imediato.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 [Nome do Curso] — Todos os direitos reservados.</p>
+  <p style="margin-top: 8px;">
+    <a href="#">Política de Privacidade</a> &nbsp;·&nbsp;
+    <a href="#">Termos de Uso</a> &nbsp;·&nbsp;
+    <a href="mailto:contato@seucurso.com.br">contato@seucurso.com.br</a>
+  </p>
+  <p style="margin-top: 12px; font-size: 12px; color: #4a4030;">Este curso não oferece consultoria jurídica. O conteúdo é de caráter exclusivamente educacional para advogados habilitados.</p>
+</footer>
+
+<script>
+  function handleSubmit() {
+    const nome = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const tel = document.getElementById('tel').value.trim();
+    if (!nome || !email || !tel) { alert('Por favor, preencha todos os campos.'); return; }
+    // Substitua a URL abaixo pela sua página de obrigado ou link do WhatsApp
+    window.location.href = 'https://wa.me/55SEUNUMEROWPP?text=Ol%C3%A1%2C+quero+entrar+no+grupo+VIP+do+curso+de+Direito+Banc%C3%A1rio%21+Nome%3A+' + encodeURIComponent(nome);
+  }
+  function handleSubmit2() {
+    const nome = document.getElementById('nome2').value.trim();
+    const email = document.getElementById('email2').value.trim();
+    const tel = document.getElementById('tel2').value.trim();
+    if (!nome || !email || !tel) { alert('Por favor, preencha todos os campos.'); return; }
+    window.location.href = 'https://wa.me/55SEUNUMEROWPP?text=Ol%C3%A1%2C+quero+entrar+no+grupo+VIP+do+curso+de+Direito+Banc%C3%A1rio%21+Nome%3A+' + encodeURIComponent(nome);
+  }
+</script>
+</body>
+</html>
